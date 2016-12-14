@@ -22,6 +22,7 @@
         </property>
     </bean>
 
+
     <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName">
             <value>${jdbc_driverClassName}</value>
@@ -37,21 +38,45 @@
         </property>
     </bean>
 
-    <!-- 自动扫描所有的mapper.xml文件 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.countclound.weixin.dao"/>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource"/>
+        <property name="mapperLocations" value="classpath*:uyun/hornet/wx/dao/mybatis/*.xml"/>
     </bean>
 
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="uyun.hornet.wx.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
 
+    <!--
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
 
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="create*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="get*" propagation="SUPPORTS" />
+            <tx:method name="query*" propagation="SUPPORTS" />
+            <tx:method name="start*" propagation="REQUIRED" />
+            <tx:method name="stop*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
 
-    <!-- @AspectJ支持 -->
-    <!--<aop:aspectj-autoproxy />-->
-
-    <!-- 任务调度 -->
+    <aop:config>
+        <aop:pointcut expression="execution(* com.countclound.weixin.controller.*.*(..))"
+                      id="service" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="service" />
+    </aop:config>
+    -->
     <task:annotation-driven />
 
-    <context:component-scan base-package="com.countclound.weixin">
+    <context:component-scan base-package="uyun.hornet.wx">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
     </context:component-scan>

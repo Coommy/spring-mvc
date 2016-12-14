@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="springmvc-weixin-java-tools:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="springmvc-weixin-java-tools.war">
+    <root id="archive" name="spring-mvc.war">
       <element id="artifact" artifact-name="springmvc-weixin-java-tools:war exploded" />
     </root>
   </artifact>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: uyun.whale:common-mybatis:2.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/uyun/whale/common-mybatis/2.0.0-SNAPSHOT/common-mybatis-2.0.0-20161130.085925-14.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/uyun/whale/common-mybatis/2.0.0-SNAPSHOT/common-mybatis-2.0.0-20161130.085925-14-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/uyun/whale/common-mybatis/2.0.0-SNAPSHOT/common-mybatis-2.0.0-20161130.085925-14-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
