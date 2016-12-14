@@ -4,7 +4,7 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="springmvc-weixin-java-tools" />
+          <element id="module-output" name="springmvc-weixin" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
@@ -57,7 +57,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/spring-mvc/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="springmvc-weixin-java-tools/web/Web" />
+      <element id="javaee-facet-resources" facet="springmvc-weixin/web/Web" />
     </root>
   </artifact>
 </component>
