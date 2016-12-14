@@ -2,8 +2,8 @@ package uyun.hornet.wx.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import uyun.hornet.wx.bean.WechatUser;
-import uyun.hornet.wx.dao.WechatUserDao;
+import uyun.hornet.wx.entity.WxUser;
+import uyun.hornet.wx.dao.WxUserDao;
 import uyun.hornet.wx.handler.MessageCustomHandler;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uyun.hornet.wx.logic.WxUserLogic;
 import uyun.whale.common.mybatis.type.UUIDTypeHandler;
 
 import javax.annotation.PostConstruct;
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -73,7 +75,7 @@ public class MessageController {
     private WxMpMessageRouter wxMpMessageRouter;
 
     @Autowired
-    private WechatUserDao wechatUserDao;
+    private WxUserLogic wxUserLogic;
 
     //  初始化
     @PostConstruct
@@ -195,14 +197,19 @@ public class MessageController {
 
     @RequestMapping(value = "/test3")
     public String test3() throws WxErrorException {
-        WechatUser user = new WechatUser();
-        user.setId(UUIDTypeHandler.createUUID());
-        user.setTenantId("22");
-        user.setOpenId("3");
-        user.setUserId("4");
-        user.setUsername("aaaa");
-        user.setCookieTime(new Date());
-        wechatUserDao.createUser(user);
+        WxUser user = new WxUser();
+        user.setUserId(UUIDTypeHandler.createUUID());
+        user.setOpenId("oZ0vxw6YjF957JUA6w63IR0JVtCE");
+        user.setTenantId(UUIDTypeHandler.createUUID());
+        Date now = new Date();
+        user.setBindingTime(now);
+        user.setCreateTime(now);
+        //设置超时时间
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        calendar.add(Calendar.DAY_OF_YEAR,20);
+        user.setExpireTime(calendar.getTime());
+        wxUserLogic.save(user);
         return "success";
     }
 

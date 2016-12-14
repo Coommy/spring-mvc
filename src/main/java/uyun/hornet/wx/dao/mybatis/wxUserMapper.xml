@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="uyun.hornet.wx.dao.WxUserDao">
+    <resultMap id="wxUserResultMap" type="uyun.hornet.wx.entity.WxUser">
+        <result property="openId" column="open_id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" typeHandler="uyun.whale.common.mybatis.type.UUIDTypeHandler"/>
+        <result property="tenantId" column="tenant_id" typeHandler="uyun.whale.common.mybatis.type.UUIDTypeHandler"/>
+        <result property="nickname" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="bindingTime" column="binding_time" jdbcType="DATETIME"/>
+        <result property="expireTime" column="expire_time" jdbcType="DATETIME"/>
+        <result property="createTime" column="create_time" jdbcType="DATETIME"/>
+    </resultMap>
+
+    <sql id="wxuser_column">
+        user_id,tenant_id,open_id,nick_name,binding_time,expire_time,create_time
+    </sql>
+
+    <delete id="delete" parameterType="String">
+        delete from hnt_wx_user where user_id=#{0,typeHandler=uyun.whale.common.mybatis.type.UUIDTypeHandler}
+    </delete>
+
+    <select id="queryByOpenId" parameterType="String" resultMap="wxUserResultMap">
+        select
+        <include refid="wxuser_column"/>
+        from hnt_wx_user where open_id=#{0}
+    </select>
+
+    <select id="queryByUserId" parameterType="String" resultMap="wxUserResultMap">
+        select
+        <include refid="wxuser_column"/>
+        from hnt_wx_user where user_id=#{0,typeHandler=uyun.whale.common.mybatis.type.UUIDTypeHandler}
+    </select>
+
+    <insert id="save" parameterType="uyun.hornet.wx.entity.WxUser">
+        insert into hnt_wx_user (<include refid="wxuser_column"/>)
+        values(#{userId},#{tenantId},#{openId},#{nickname},#{bindingTime},#{expirTime},#{createTime})
+    </insert>
+
+    <update id="updateExpire">
+        update hnt_wx_user set expire_time=${0} where user_id=${1,typeHandler=uyun.whale.common.mybatis.type.UUIDTypeHandler}
+    </update>
+
+</mapper>
