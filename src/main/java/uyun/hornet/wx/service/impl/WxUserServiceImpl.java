@@ -1,7 +1,11 @@
 package uyun.hornet.wx.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uyun.hornet.wx.entity.WxUser;
+import uyun.hornet.wx.error.WxUserException;
+import uyun.hornet.wx.logic.WxUserLogic;
 import uyun.hornet.wx.service.WxUserService;
 
 import java.util.Date;
@@ -11,6 +15,9 @@ import java.util.Date;
  */
 @Service
 public class WxUserServiceImpl implements WxUserService {
+    @Autowired
+    private WxUserLogic wxUserLogic;
+
     /**
      * 根据优云用户ID删除记录
      *
@@ -18,7 +25,11 @@ public class WxUserServiceImpl implements WxUserService {
      */
     @Override
     public boolean delete(String userId) {
-        return false;
+        if (StringUtils.isBlank(userId)) {
+            throw new WxUserException("删除失败，优云用户ID不能为空");
+        }
+        
+        return wxUserLogic.delete(userId);
     }
 
     /**
@@ -28,7 +39,7 @@ public class WxUserServiceImpl implements WxUserService {
      */
     @Override
     public WxUser queryByOpenId(String openId) {
-        return null;
+        return wxUserLogic.queryByOpenId(openId);
     }
 
     /**
@@ -39,7 +50,7 @@ public class WxUserServiceImpl implements WxUserService {
      */
     @Override
     public WxUser queryByUserId(String tenantId, String userId) {
-        return null;
+        return wxUserLogic.queryByUserId(tenantId, userId);
     }
 
     /**
@@ -49,7 +60,7 @@ public class WxUserServiceImpl implements WxUserService {
      */
     @Override
     public boolean save(WxUser wxUser) {
-        return false;
+        return wxUserLogic.save(wxUser);
     }
 
     /**
@@ -60,6 +71,6 @@ public class WxUserServiceImpl implements WxUserService {
      */
     @Override
     public boolean updateExpire(Date expireTime, String userId) {
-        return false;
+        return wxUserLogic.updateExpire(expireTime, userId);
     }
 }

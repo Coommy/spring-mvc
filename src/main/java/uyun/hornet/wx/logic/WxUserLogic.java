@@ -22,7 +22,6 @@ public class WxUserLogic {
      * @param userId
      */
     public boolean delete(String userId) {
-
         return wxUserDao.delete(userId);
     }
 
@@ -32,8 +31,7 @@ public class WxUserLogic {
      * @param openId
      */
     public WxUser queryByOpenId(String openId) {
-        WxUser user = wxUserDao.queryByOpenId(openId);
-        return user;
+        return wxUserDao.queryByOpenId(openId);
     }
 
     /**
@@ -43,8 +41,7 @@ public class WxUserLogic {
      * @param userId
      */
     public WxUser queryByUserId(String tenantId, String userId) {
-        WxUser wxUser =  wxUserDao.queryByUserId(tenantId,userId);
-        return wxUser;
+        return wxUserDao.queryByUserId(tenantId,userId);
     }
 
     /**
@@ -63,7 +60,6 @@ public class WxUserLogic {
      * @param userId
      */
     public boolean updateExpire(Date expireTime, String userId) {
-
         return wxUserDao.updateExpire(expireTime,userId);
     }
 }

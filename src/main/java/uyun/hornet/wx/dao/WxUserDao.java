@@ -1,5 +1,6 @@
 package uyun.hornet.wx.dao;
 
+import org.apache.ibatis.annotations.Param;
 import uyun.hornet.wx.entity.WxUser;
 
 import java.util.Date;

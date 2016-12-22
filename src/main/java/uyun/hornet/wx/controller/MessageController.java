@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uyun.hornet.wx.logic.WxUserLogic;
+import uyun.hornet.wx.service.WxUserService;
 import uyun.whale.common.mybatis.type.UUIDTypeHandler;
 
 import javax.annotation.PostConstruct;
@@ -76,6 +77,9 @@ public class MessageController {
 
     @Autowired
     private WxUserLogic wxUserLogic;
+
+    @Autowired
+    private WxUserService wxUserService;
 
     //  初始化
     @PostConstruct
@@ -198,9 +202,9 @@ public class MessageController {
     @RequestMapping(value = "/test3")
     public String test3() throws WxErrorException {
         WxUser user = new WxUser();
-        user.setUserId(UUIDTypeHandler.createUUID());
+        user.setUserId("121321");
         user.setOpenId("oZ0vxw6YjF957JUA6w63IR0JVtCE");
-        user.setTenantId(UUIDTypeHandler.createUUID());
+        user.setTenantId("321312");
         Date now = new Date();
         user.setBindingTime(now);
         user.setCreateTime(now);
@@ -209,7 +213,7 @@ public class MessageController {
         calendar.setTime(now);
         calendar.add(Calendar.DAY_OF_YEAR,20);
         user.setExpireTime(calendar.getTime());
-        wxUserLogic.save(user);
+        wxUserService.save(user);
         return "success";
     }
 

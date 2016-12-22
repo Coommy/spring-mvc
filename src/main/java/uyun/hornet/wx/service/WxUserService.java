@@ -1,6 +1,7 @@
 package uyun.hornet.wx.service;
 
 import uyun.hornet.wx.entity.WxUser;
+import uyun.hornet.wx.error.WxUserException;
 
 import java.util.Date;
 

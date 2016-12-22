@@ -6,9 +6,9 @@
         <result property="userId" column="user_id" typeHandler="uyun.whale.common.mybatis.type.UUIDTypeHandler"/>
         <result property="tenantId" column="tenant_id" typeHandler="uyun.whale.common.mybatis.type.UUIDTypeHandler"/>
         <result property="nickname" column="nick_name" jdbcType="VARCHAR"/>
-        <result property="bindingTime" column="binding_time" jdbcType="DATETIME"/>
-        <result property="expireTime" column="expire_time" jdbcType="DATETIME"/>
-        <result property="createTime" column="create_time" jdbcType="DATETIME"/>
+        <result property="bindingTime" column="binding_time" jdbcType="TIMESTAMP"/>
+        <result property="expireTime" column="expire_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="wxuser_column">
@@ -33,11 +33,11 @@
 
     <insert id="save" parameterType="uyun.hornet.wx.entity.WxUser">
         insert into hnt_wx_user (<include refid="wxuser_column"/>)
-        values(#{userId},#{tenantId},#{openId},#{nickname},#{bindingTime},#{expirTime},#{createTime})
+        values(#{userId,typeHandler=uyun.whale.common.mybatis.type.UUIDTypeHandler},#{tenantId,typeHandler=uyun.whale.common.mybatis.type.UUIDTypeHandler},#{openId},#{nickname},#{bindingTime},#{expireTime},#{createTime})
     </insert>
 
     <update id="updateExpire">
-        update hnt_wx_user set expire_time=${0} where user_id=${1,typeHandler=uyun.whale.common.mybatis.type.UUIDTypeHandler}
+        update hnt_wx_user set expire_time=#{0} where user_id=#{1,typeHandler=uyun.whale.common.mybatis.type.UUIDTypeHandler}
     </update>
 
 </mapper>

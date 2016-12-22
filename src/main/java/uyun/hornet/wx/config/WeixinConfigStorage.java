@@ -32,4 +32,35 @@ public class WeixinConfigStorage extends WxMpInMemoryConfigStorage {
         this.aesKey = weixin_aeskey;
     }
 
+    public String getWeixin_appid() {
+        return weixin_appid;
+    }
+
+    public void setWeixin_appid(String weixin_appid) {
+        this.weixin_appid = weixin_appid;
+    }
+
+    public String getWeixin_secretkey() {
+        return weixin_secretkey;
+    }
+
+    public void setWeixin_secretkey(String weixin_secretkey) {
+        this.weixin_secretkey = weixin_secretkey;
+    }
+
+    public String getWeixin_token() {
+        return weixin_token;
+    }
+
+    public void setWeixin_token(String weixin_token) {
+        this.weixin_token = weixin_token;
+    }
+
+    public String getWeixin_aeskey() {
+        return weixin_aeskey;
+    }
+
+    public void setWeixin_aeskey(String weixin_aeskey) {
+        this.weixin_aeskey = weixin_aeskey;
+    }
 }
